@@ -12,16 +12,16 @@ export type Config = {
     strict: boolean;
     isDebug: boolean;
     remote: string;
-
     branch: string;
+
     path: string;
     buildPath: string;
     deployPath: string;
 
-    buildScript: Steps | null;
-    testScript: Steps | null;
-    postTasks: Steps | null;
-    restartScript: string | null;
+    buildScript?: Steps;
+    testScript?: Steps;
+    postTasks?: Steps;
+    restartScript?: string;
 
     environmentVariables?: EnvironmentVariables;
     commitTag?: string;
@@ -36,12 +36,28 @@ export type EnvironmentVariables = {
 };
 
 const config: Partial<Config> = {
+    slackPath: null,
+    slackChannel: null,
+    slackUser: null,
     failedText: 'Build failed!',
     successText: 'Build success!',
     poll: 60,
+    strict: false,
+    isDebug: false,
     remote: 'origin',
     branch: 'master',
-    strict: false,
+
+    path: null,
+    buildPath: null,
+    deployPath: null,
+
+    buildScript: null,
+    testScript: null,
+    postTasks: null,
+    restartScript: null,
+
+    environmentVariables: null,
+    commitTag: null,
 };
 
 export const configuration: Config = {
