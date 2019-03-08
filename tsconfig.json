@@ -1,0 +1,27 @@
+{
+    "version": "2.2.2",
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "watch": false
+    },
+    "exclude": [
+        "node_modules",
+        "typings/browser"
+    ],
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": false
+    }
+}
