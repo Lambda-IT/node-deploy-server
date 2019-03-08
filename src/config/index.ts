@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-export const OptionalConfigurations: (keyof Config)[] = ['environmentVariables', 'commitTag'];
+export const OptionalConfigurations: (keyof Config)[] = ['environmentVariables', 'commitTag', 'postTasks', 'testScript', 'buildPath'];
 
 export type Config = {
     slackPath: string;
@@ -16,11 +16,12 @@ export type Config = {
     branch: string;
     path: string;
     buildPath: string;
-    buildScript: Steps;
-    testScript: Steps;
-    postTasks: Steps;
     deployPath: string;
-    restartScript: string;
+
+    buildScript: Steps | null;
+    testScript: Steps | null;
+    postTasks: Steps | null;
+    restartScript: string | null;
 
     environmentVariables?: EnvironmentVariables;
     commitTag?: string;

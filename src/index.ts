@@ -190,12 +190,14 @@ function build(branch) {
     console.log(`[deploy] ${getCurrentDate()} - Start processing`, branch);
     return BPromise.resolve()
         .then(() => {
+            if (!configuration.buildScript) {
+                return;
+            }
             console.log('[deploy] Build started');
-            return execParallel(configuration.buildScript, configuration.buildPath);
-        })
-        .then((buildResult: any) => {
-            console.log('[deploy] Build done');
-            console.log('[deploy] BuildResult:', buildResult);
+            return execParallel(configuration.buildScript, configuration.buildPath).then((buildResult: any) => {
+                console.log('[deploy] Build done');
+                console.log('[deploy] BuildResult:', buildResult);
+            });
         })
         .then(() => {
             if (!configuration.testScript) {
@@ -212,11 +214,10 @@ function build(branch) {
         .then(() => {
             console.log('[deploy] Deploying started');
             currentStep = DeploySteps.Deploy;
-            return execAsync(`rsync -rtl ${configuration.buildPath} ${configuration.deployPath}`);
-        })
-        .then((deployResult: any) => {
-            console.log('[deploy] Deploying done');
-            console.log('[deploy] DeployResult:', deployResult);
+            return execAsync(`rsync -rtl ${configuration.buildPath} ${configuration.deployPath}`).then((deployResult: any) => {
+                console.log('[deploy] Deploying done');
+                console.log('[deploy] DeployResult:', deployResult);
+            });
         })
         .then(() => {
             if (!configuration.commitTag) {
