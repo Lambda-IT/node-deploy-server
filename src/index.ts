@@ -214,7 +214,7 @@ function build(branch) {
         .then(() => {
             console.log('[deploy] Deploying started');
             currentStep = DeploySteps.Deploy;
-            return execAsync(`rsync -rtl ${configuration.buildPath} ${configuration.deployPath}`).then((deployResult: any) => {
+            return execAsync(`rsync -rtl --delete ${configuration.buildPath} ${configuration.deployPath}`).then((deployResult: any) => {
                 console.log('[deploy] Deploying done');
                 console.log('[deploy] DeployResult:', deployResult);
             });
