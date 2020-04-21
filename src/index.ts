@@ -230,7 +230,7 @@ function build(branch) {
             return execAsync(
                 `grep -rli --exclude-dir=node_modules '${configuration.commitTag}' ${
                     configuration.deployPath
-                } | xargs sed -i '' 's/${configuration.commitTag}/${branch.commit}/'`,
+                } | xargs sed -i 's/${configuration.commitTag}/${branch.commit}/'`,
             ).then((markCommitResult: any) => {
                 console.log('[deploy] Post Deploy done');
                 console.log('[deploy] PostDeployResult:', markCommitResult);
